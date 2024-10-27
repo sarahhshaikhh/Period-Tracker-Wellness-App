@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Mood Journal</h2>
+        <form>
+            <div class="form-row">
+                <label for="mood">How do you feel?</label>
+                <select id="mood">
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="angry">Angry</option>
+                    <option value="anxious">Anxious</option> <br><br>
+                </select>
+            </div><br>
+
+            <div class="form-row">
+                <label for="moodNotes"></label>
+                <textarea id="moodNotes" rows="4" placeholder="Describe your feelings..."></textarea><br><br>
+            </div>
+            
+            <div class="form-row">
+                <button type="submit">Log Mood</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

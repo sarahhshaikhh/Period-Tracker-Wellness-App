@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Tracking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Exercise Tracking</h2>
+        <form>
+            <label for="exerciseType">Exercise Type</label>
+            <input type="text" id="exerciseType" placeholder="Type of exercise">
+            
+            <label for="duration">Duration (minutes)</label>
+            <input type="text" id="duration" placeholder="Duration of exercise">
+            
+            
+            <button type="submit">Log Exercise</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* General styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body styling */
+        body {
+            background-color: #ffccd5; /* Added semicolon here */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container styling */
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow effect */
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Heading styling */
+        .container h1 {
+            color: #ff66b2;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Achievements styling */
+        #achievements {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Individual achievement styling */
+        #achievements div {
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #ffccd5; /* Added semicolon here */
+            color: #555;
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: transform 0.2s ease;
+        }
+
+        #achievements div:hover {
+            transform: scale(1.05);
+            background-color: #ffb3c1; /* Slightly darker shade for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Achievements</h1>
+
+        <div id="achievements">
+            <!-- Display Achievements based on goals here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample script to load and display achievements
+        const achievements = [
+            { goal: "Mood Entries Goal", status: "Bronze Mood Tracker" },
+            { goal: "Calorie Goal", status: "Calorie Crusher - Bronze" },
+            { goal: "Exercise Goal", status: "Bronze Exerciser" }
+        ];
+
+        const achievementsDiv = document.getElementById('achievements');
+        achievements.forEach(achievement => {
+            const item = document.createElement('div');
+            item.textContent = `${achievement.goal}: ${achievement.status}`;
+            achievementsDiv.appendChild(item);
+        });
+    </script>
+</body>
+</html>
