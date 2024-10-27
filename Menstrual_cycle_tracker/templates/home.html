@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Period Tracker Calendar</title>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        /* Add your additional CSS styles here */
+        .day {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .day.logged {
+            background-color: #ffb3c1; /* Color for logged period days */
+        }
+
+        .day.predicted {
+            background-color: #ffd1dc; /* Color for predicted period days */
+        }
+
+        /* Other existing styles */
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Hi, {{ username }}</h1> <!-- Dynamic username here -->
+        <h2>Own your every phase - It's your superpower</h2>
+    </div>
+
+    <!-- Navigation Icons -->
+    <div class="nav-icons">
+        <div class="nav-icon" onclick="showCommunitySupport()">
+            <span>Home</span>
+        </div>
+        <div class="nav-icon" onclick="window.location.href='/tutorial'">
+            <span>Tutorial</span>
+        </div>
+        <a href="{{ url_for('support') }}" class="nav-icon">
+            <span>Community Support</span>
+        </a>
+        <a href="{{ url_for('expert_advice') }}" class="nav-icon">
+            <span>Expert Advice</span>
+        </a>
+        <div class="nav-icon">
+            <span>Profile</span>
+        </div>
+    </div>
+
+    <!-- Main Content - Calendar and Sidebar -->
+    <div class="main-content">
+        <div class="calendar">
+            <div class="month-navigation">
+                <button onclick="prevMonth()">❮</button>
+                <h2 id="monthYear"></h2>
+                <button onclick="nextMonth()">❯</button>
+            </div>
+            <div class="days" id="calendarDays"></div>
+        </div>
+    </div>
+
+    <!-- Log Period Section -->
+    <div class="log-period">
+        <h3>Log Period</h3>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate">
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate">
+        <button onclick="logPeriod()">Log Period</button>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="title">
+                <h1><span>Features</span></h1>
+            </div>
+            <div class="services_boxes">
+                <a href="/set_goal" class="box">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <h4>Setting Goals</h4>
+                </a>
+                <a href="/mood" class="box">
+                    <i class="fa-solid fa-smile"></i>
+                    <h4>Mood Journal</h4>
+                </a>
+                <a href="/nutrition" class="box">
+                    <i class="fa-brands fa-nutritionix"></i>
+                    <h4>Nutrition Tracking</h4>
+                </a>
+                <a href="/exercise" class="box">
+                    <i class="fa-solid fa-person-walking"></i>
+                    <h4>Exercise Tracking</h4>
+                </a>
+                <div class="box">
+                    <i class="fa-solid fa-chart-line"></i>   
+                    <h4>Insights</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentDate = dayjs();
+        let loggedDays = []; // Array to hold logged days for periods
+        const cycleLength = 28; // Average cycle length in days
+
+        function updateCalendar() {
+            const monthYear = document.getElementById('monthYear');
+            const calendarDays = document.getElementById('calendarDays');
+            monthYear.textContent = currentDate.format('MMMM YYYY');
+            calendarDays.innerHTML = '';
+
+            const startOfMonth = currentDate.startOf('month');
+            const daysInMonth = currentDate.daysInMonth();
+            const firstDayIndex = startOfMonth.day();
+
+            // Create empty days at the beginning of the month
+            for (let i = 0; i < firstDayIndex; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.classList.add('day');
+                calendarDays.appendChild(emptyDay);
+            }
+
+            // Create each day of the month
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                dayElement.setAttribute('data-day', i);
+                dayElement.innerHTML = `<span>${i}</span>`;
+                dayElement.onclick = () => selectDay(i); // Assign click event
+                // Highlight logged days
+                if (loggedDays.includes(i)) {
+                    dayElement.classList.add('logged');
+                }
+                calendarDays.appendChild(dayElement);
+            }
+        }
+
+        function selectDay(day) {
+            // Highlight the selected day and log it
+            if (loggedDays.includes(day)) {
+                loggedDays = loggedDays.filter(d => d !== day); // Remove if already logged
+            } else {
+                loggedDays.push(day); // Add to logged days
+            }
+            updateCalendar(); // Update calendar to show changes
+        }
+
+        function prevMonth() {
+            currentDate = currentDate.subtract(1, 'month');
+            updateCalendar();
+        }
+
+        function nextMonth() {
+            currentDate = currentDate.add(1, 'month');
+            updateCalendar();
+        }
+
+        function logPeriod() {
+            const startDate = dayjs(document.getElementById('startDate').value);
+            const endDate = dayjs(document.getElementById('endDate').value);
+
+            if (startDate.isValid() && endDate.isValid() && startDate.isBefore(endDate)) {
+                // Log each day in the range
+                for (let d = startDate; d.isBefore(endDate.add(1, 'day')); d = d.add(1, 'day')) {
+                    const day = d.date();
+                    if (!loggedDays.includes(day)) {
+                        loggedDays.push(day);
+                    }
+                }
+                updateCalendar(); // Update the calendar with logged days
+                predictNextPeriod(endDate); // Predict the next period
+            } else {
+                alert('Please enter valid start and end dates.');
+            }
+        }
+
+        function predictNextPeriod(endDate) {
+            const nextStartDate = endDate.add(cycleLength, 'day'); // Predict next start date
+            const nextEndDate = nextStartDate.add(endDate.diff(startDate, 'day'), 'day'); // Predict next end date
+
+            // Highlight predicted days in the calendar
+            for (let d = nextStartDate; d.isBefore(nextEndDate.add(1, 'day')); d = d.add(1, 'day')) {
+                const day = d.date();
+                const days = document.querySelectorAll('.day');
+                days.forEach(dayDiv => {
+                    if (parseInt(dayDiv.getAttribute('data-day')) === day) {
+                        dayDiv.classList.add('predicted');
+                    }
+                });
+            }
+            alert(`Your next period is predicted to start on ${nextStartDate.format('MMMM D, YYYY')}.`);
+        }
+
+        updateCalendar();
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Support</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            border-radius: 10px;
+            width: 500px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .modal-content h3 {
+            color: #ff0077;
+            margin-bottom: 10px;
+        }
+
+        /* Chat section styling */
+        .chat-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .chat-message {
+            margin-bottom: 5px;
+            padding: 5px;
+            background-color: #ffe6ea;
+            border-radius: 5px;
+            color: #333;
+        }
+        .chat-message strong {
+            color: #ff0077;
+            margin-right: 5px;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            background-color: #ff0077;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Community Support Modal -->
+    <div class="modal" id="communityModal">
+        <div class="modal-content">
+            <h3>Community Support</h3>
+            <p>Welcome to the community! Feel free to ask questions and share experiences.</p>
+            <div class="chat-box" id="chatBox">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatMessage" placeholder="Type your message...">
+                <button onclick="postMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show and hide community support modal
+        function showCommunitySupport() {
+            document.getElementById('communityModal').style.display = 'flex';
+        }
+
+        // Automatically show the Community Support modal when the page loads
+        window.onload = function() {
+            showCommunitySupport();
+        };
+
+        // Chat functionality
+        function postMessage() {
+            const messageInput = document.getElementById('chatMessage');
+            const messageText = messageInput.value.trim();
+            const userName = "{{ username }}"; // Dynamic username from the server
+            if (messageText) {
+                const chatBox = document.getElementById('chatBox');
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message');
+                messageElement.innerHTML = `<strong>${userName}:</strong> ${messageText}`;
+
+                chatBox.appendChild(messageElement);
+                chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to bottom
+                messageInput.value = '';  // Clear input
+            }
+        }
+    </script>
+</body>
+</html>
