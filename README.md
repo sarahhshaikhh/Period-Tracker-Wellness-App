@@ -1,4 +1,4 @@
-# HTF24-Team-080
+# Menstrual Tracker Web App
 
 ## GitHub submission guide
 
