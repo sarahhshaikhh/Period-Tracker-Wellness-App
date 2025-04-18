@@ -1,76 +1,94 @@
-# Menstrual Tracker Web App
+# 🌸 Bloom Period Tracker - Menstrual Tracker Web App 🌸
+Bloom Period Tracker
+Bloom Period Tracker is a web-based platform designed to empower women with tools for tracking their menstrual cycles, setting wellness goals, and accessing educational resources. This platform offers a comprehensive approach to women’s health with features that include expert advice scheduling, community support, and personalized progress tracking.
 
-## GitHub submission guide
+# Key Features
+1. Educational Videos on Menstrual Health
+A Tutorial Section filled with educational videos on menstrual health, aimed at providing crucial information on cycle tracking, hormonal health, and general wellness.
 
-In this Readme, you will find a guide on how to fork this Repository, add files to it, and make a pull request to contribute your changes.
+2. Expert Advice Scheduling
+Flexible Appointment Booking: Seamlessly schedule consultations with healthcare professionals to get personalized advice on menstrual and reproductive health.
 
-<details open>
-<summary><h3>1. Login to your GitHub Account by heading over to <a href="https://github.com">github.com</a></h3></summary>
-<br>
-<ul>
-   <li>Open the <a href="https://github.com/cbitosc/HTF24-Team-080">current repo</a> in a new tab.</li>
-   <li>Perform all operations in the newly opened tab, and follow the current tab for instructions.</li>
-</ul>
-</details>
+3. Community Support
+A Safe Space for women to share experiences, ask questions, and offer advice. This feature promotes a positive, supportive environment, with all interactions moderated for privacy and safety.
 
-<details>
-<summary><h3>2. Fork the Repository</h3></summary>
-<br>
-<ul>
- <li>In the newly opened tab, on the top-right corner, click on <b>Fork</b></li>
- <img src="/images/fork.png">
+4. Goal-Setting and Tracking
+Personalized Goals: Set mood, calorie, and exercise goals to align with your wellness objectives. Track your progress and stay motivated with personalized insights and reports.
 
- <li>Enter the <b>Repository Name</b> as <b>HTF24-Team-080</b>.</li>
- <li>Then click <b>Create Fork</b> leaving all other fields to their default value.</li>
- <img src="/images/create-fork.png">
- <li>After a few moments, you can view the repo.</li>
-</ul>
-</details>
+5. Insights Dashboard
+An Interactive Dashboard that displays a summary of your health data, tracking progress over time. The dashboard includes key metrics like mood, physical activity, and overall health, helping users stay motivated and on track.
 
-<details>
-<summary><h3>3. Clone your Repository</h3></summary>
-<br>
-<ul>
- <li>Click on <b>Code</b> and from the dropdown menu copy your <b>web URL</b> in your forked Repository. </li>
- <img src="/images/clone1.png">
- <li>Now open terminal on your local machine.</li>
- <li>Use the following command to clone your forked Repository:</li>
-<code> git clone https://github.com/your-username/HTF24-Team-080.git </code>
-<hr>
- <img src="/images/clone2.png">
+# Frontend Overview
+The user interface is designed to be intuitive and easy to navigate. Developed using HTML and CSS, the frontend provides:
 
-</ul>
-</details>
+- Pop-Up Modals: For scheduling appointments and engaging with community support.
 
-<details>
-<summary><h3>4. Adding files to the Repository</h3></summary>
-<br/>
-<ul>
- <li>While doing it for the first time, create a new branch for your changes.</li>
-   <code> git checkout -b branch-name </code>
-   <li>Add your files or make modifications to existing files.</li>
-   <li>Stage your changes:</li>
-   <code> git add . </code>
-   <li>Commit your changes:</li>
-   <code> git commit -m "Descriptive commit message" </code>
-   <li>Push changes to your fork </li>
-   <code> git push origin branch-name </code>
-   <hr>
-   
- <img src="/images/push.png">
-</ul>
-</details>
+- Interactive Forms: For goal-setting, logging entries, and tracking personal progress.
 
-<details>
-<summary><h3>5. Create a Pull Request</h3></summary>
-   <br>
-<ul>
- <li>Finally, click on the <b>Contribute</b> button and choose <b>Open Pull Request</b>.</li>
- <img src="/images/PR1.png">
- <li>Leaving all fields to their default values, click on <b>Create Pull Request</b>.</li>
- <img src="/images/PR2.png">
- <li>Wait for a few moments, then you are all done</li>
-</ul>
-</details>
+- Insights Dashboard: A motivating visual summary of your wellness journey, showing data trends and achievements.
 
-## Thanks for participating!
+# Technologies Used:
+HTML: Structure and content of the web pages.
+
+CSS: Styling to ensure the platform is visually appealing and user-friendly.
+
+# Backend Overview
+The Flask framework is utilized for backend management, handling data processing, session management, and ensuring smooth integration between frontend and backend. Core functionalities include:
+
+- Data Processing: Storing and managing user entries and wellness goals.
+
+- Appointment Scheduling: Safely managing user preferences for consultations with healthcare professionals.
+
+- Community Features: Allowing users to interact, share, and support one another in a secure environment.
+
+- Insights Calculation: Aggregating user data to provide personalized summaries and actionable insights.
+
+# Technologies Used:
+Flask: Web framework for managing routing, requests, and backend logic.
+
+Python: For server-side scripting and logic.
+
+SQL/Database: Secure storage of user data, logs, and preferences.
+
+# Data Management and Security
+User data is handled with care, ensuring privacy and security at all stages. The following data is securely stored:
+
+- User Data: Personal preferences, goal entries, and tracking logs.
+
+- Scheduling Information: Appointment preferences and schedules for healthcare consultations.
+
+- Community Interactions: All user-generated content in the community section is stored and moderated.
+
+Security Features:
+
+- Data encryption and secure storage for all sensitive information, including health data.
+
+- Robust authentication and session management to ensure privacy and security for each user.
+
+# Installation & Setup
+To get started with Bloom Period Tracker locally, follow the instructions below:
+
+1. Clone the Repository:
+bash
+Copy
+Edit
+git clone https://github.com/your-username/bloom-period-tracker.git
+2. Install Dependencies:
+Make sure you have Python 3.8+ installed. Then, run:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+3. Set up the Database:
+Configure your database (use SQLite for simplicity during development, or another database for production).
+
+Run the migration scripts if necessary to set up tables.
+
+4. Run the Application:
+bash
+Copy
+Edit
+python app.py
+The application should now be running locally at http://localhost:5000.
+
